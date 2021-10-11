@@ -1,0 +1,48 @@
+---
+repos:
+  - repo: git://github.com/pre-commit/pre-commit-hooks
+    rev: v4.0.1
+    hooks:
+      - id: fix-byte-order-marker
+      - id: check-executables-have-shebangs
+      - id: check-merge-conflict
+      - id: check-yaml
+      - id: detect-private-key
+      - id: end-of-file-fixer
+      - id: mixed-line-ending
+      - id: trailing-whitespace
+        args: [--markdown-linebreak-ext=md]
+
+  - repo: https://github.com/jorisroovers/gitlint
+    rev: v0.15.1
+    hooks:
+      - id: gitlint
+        args: [--contrib=contrib-title-conventional-commits, --ignore=body-is-missing, --msg-filename]
+
+  - repo: git://github.com/igorshubovych/markdownlint-cli
+    rev: v0.28.1
+    hooks:
+      - id: markdownlint
+        exclude: .github/ISSUE_TEMPLATE
+
+  - repo: git://github.com/detailyang/pre-commit-shell
+    rev: v1.0.6
+    hooks:
+      - id: shell-lint
+
+  - repo: https://github.com/ansible-community/ansible-lint
+    # This is intentionally being held back because of issues in v5 per
+    # https://github.com/cisagov/skeleton-ansible-role/issues/69
+    rev: v5.1.2
+    hooks:
+      - id: ansible-lint
+
+  - repo: git://github.com/adrienverge/yamllint
+    rev: v1.26.3
+    hooks:
+      - id: yamllint
+        name: yamllint
+        description: This hook runs yamllint.
+        entry: yamllint
+        language: python
+        types: [file, yaml]

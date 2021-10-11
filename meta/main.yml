@@ -1,0 +1,18 @@
+# meta file
+---
+galaxy_info:
+  namespace: appsilon
+  role_name: rstudio_workbench
+  author: DamianBudelewski
+  company: Appsilon
+  description: Set up (the latest version of) RStudio Workbench in Debian-like systems
+  license: MIT
+  min_ansible_version: 2.11.1
+  platforms:
+    - name: Ubuntu
+      versions:
+        - focal
+  galaxy_tags:
+    - development
+    - system
+dependencies: []
