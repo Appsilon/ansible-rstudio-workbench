@@ -1,0 +1,15 @@
+# vars file
+---
+rstudio_workbench_dependencies:
+  - curl
+rstudio_workbench_downloads_path: /var/lib/ansible/rstudio-workbench/downloads
+rstudio_workbench_machine_map:
+  i686: i386
+  i386: i386
+  x86_64: amd64
+  amd64: amd64
+r_versions:
+  - 4.1.0
+  - 4.0.0
+  - 3.6.3
+  - 3.5.3

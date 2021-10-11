@@ -1,0 +1,10 @@
+# defaults file
+---
+rstudio_workbench_version: "2021.09.0-351.pro6"
+rstudio_workbench_install: []
+
+rstudio_workbench_www_port: 8787
+rstudio_workbench_config_override: ""
+
+rstudio_workbench_http_override: |
+    www-port={{ rstudio_workbench_www_port }}

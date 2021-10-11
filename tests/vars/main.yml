@@ -1,0 +1,4 @@
+# vars file
+---
+rstudio_workbench_install:
+  - r-base

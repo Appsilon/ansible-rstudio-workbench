@@ -1,0 +1,19 @@
+# post test file
+---
+- name: install test dependencies
+  apt:
+    name:
+      - wget
+    state: "{{ apt_install_state | default('latest') }}"
+
+- name: test rstudio-workbench installation
+  shell: >
+    curl -s -o /dev/null -I -w “%{http_code}” http://localhost:8787/auth-sign-in
+    | grep -q ‘200’
+    && (echo 'Availability test: pass' && exit 0)
+    || (echo 'Availability test: fail' && exit 1)
+  args:
+    warn: false
+  changed_when: false
+  tags:
+    - skip_ansible_lint
