@@ -8,3 +8,6 @@ rstudio_workbench_config_override: ""
 
 rstudio_workbench_http_override: |
     www-port={{ rstudio_workbench_www_port }}
+
+rstudio_workbench_rsession_config_override: |
+    session-timeout-minutes=30
