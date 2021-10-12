@@ -10,6 +10,17 @@
   tags:
     - rstudio-workbench-configure-server
 
+- name: configure | update (session) configuration file
+  template:
+    src: etc/rstudio/rsession.conf.j2
+    dest: /etc/rstudio/rsession.conf
+    owner: root
+    group: root
+    mode: 0644
+  notify: restart rstudio-workbench
+  tags:
+    - rstudio-workbench-configure-session
+
 - name: configure | activate server license
   shell: |
     /usr/sbin/rstudio-server license-manager activate {{ rstudio_workbench_license }}
