@@ -1,9 +1,5 @@
 {{ ansible_managed | comment }}
 
-{% if rstudio_workbench_config_override is defined and rstudio_workbench_config_override|length %}
-{{ rstudio_workbench_config_override }}
-{% else %}
-{% if rstudio_workbench_http_override is defined and rstudio_workbench_http_override|length %}
-{{ rstudio_workbench_http_override }}
-{% endif %}
+{% if rstudio_workbench_rserver_config_override is defined and rstudio_workbench_rserver_config_override|length %}
+{{ rstudio_workbench_rserver_config_override }}
 {% endif %}
