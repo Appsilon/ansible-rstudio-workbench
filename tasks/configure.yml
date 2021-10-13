@@ -21,6 +21,54 @@
   tags:
     - rstudio-workbench-configure-session
 
+- name: configure | create (load-balancer) configuration file
+  template:
+    src: etc/rstudio/load-balancer.j2
+    dest: /etc/rstudio/load-balancer
+    owner: root
+    group: root
+    mode: 0644
+  notify: restart rstudio-workbench
+  when: rstudio_workbench_load_balancer_config_override is defined and rstudio_workbench_load_balancer_config_override|length
+  tags:
+    - rstudio-workbench-configure-load-balancer
+
+- name: configure | create (openid) configuration file
+  template:
+    src: etc/rstudio/openid-client-secret.j2
+    dest: /etc/rstudio/openid-client-secret
+    owner: root
+    group: root
+    mode: 0600
+  notify: restart rstudio-workbench
+  when: (rstudio_workbench_openid_client_id is defined and rstudio_workbench_openid_client_id|length) and (rstudio_workbench_openid_client_secret is defined and rstudio_workbench_openid_client_secret|length)
+  tags:
+    - rstudio-workbench-configure-openid
+
+- name: configure | link (env-vars) file
+  file:
+    src: "{{ rstudio_workbench_env_vars_file_path }}"
+    dest: /etc/rstudio/env-vars
+    owner: root
+    group: root
+    state: link
+  notify: restart rstudio-workbench
+  when: (rstudio_workbench_env_vars_file_path is defined and rstudio_workbench_env_vars_file_path|length) and rstudio_workbench_env_vars|length == 0
+  tags:
+    - rstudio-workbench-configure-env-vars
+
+- name: configure | create (env-vars) file
+  template:
+    src: etc/rstudio/env-vars.j2
+    dest: /etc/rstudio/env-vars
+    owner: root
+    group: root
+    mode: 0644
+  notify: restart rstudio-workbench
+  when: rstudio_workbench_env_vars is defined and rstudio_workbench_env_vars|length
+  tags:
+    - rstudio-workbench-configure-env-vars
+
 - name: configure | activate server license
   shell: |
     /usr/sbin/rstudio-server license-manager activate {{ rstudio_workbench_license }}
