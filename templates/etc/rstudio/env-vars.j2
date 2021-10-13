@@ -1,0 +1,5 @@
+{{ ansible_managed | comment }}
+
+{% if rstudio_workbench_env_vars is defined and rstudio_workbench_env_vars|length %}
+{{ rstudio_workbench_env_vars }}
+{% endif %}
