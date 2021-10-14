@@ -12,8 +12,7 @@ rstudio_workbench_rserver_config_override: |
 
 rstudio_workbench_rsession_config_override: ""
 
-rstudio_workbench_load_balancer_config_override: |
-  abcd
+rstudio_workbench_load_balancer_config_override: ""
 
 rstudio_workbench_openid_client_id: ""
 rstudio_workbench_openid_client_secret: ""
