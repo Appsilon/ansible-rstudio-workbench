@@ -19,3 +19,5 @@ rstudio_workbench_openid_client_secret: ""
 
 rstudio_workbench_env_vars_file_path: ""
 rstudio_workbench_env_vars: ""
+
+rstudio_workbench_database_config_override: ""
