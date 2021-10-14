@@ -29,7 +29,7 @@
     group: root
     mode: 0644
   notify: restart rstudio-workbench
-  when: rstudio_workbench_load_balancer_config_override is defined and rstudio_workbench_load_balancer_config_override|length
+  when: rstudio_workbench_load_balancer_config_override is defined 
   tags:
     - rstudio-workbench-configure-load-balancer
 
@@ -41,7 +41,9 @@
     group: root
     mode: 0600
   notify: restart rstudio-workbench
-  when: (rstudio_workbench_openid_client_id is defined and rstudio_workbench_openid_client_id|length) and (rstudio_workbench_openid_client_secret is defined and rstudio_workbench_openid_client_secret|length)
+  when: 
+    - rstudio_workbench_openid_client_id is defined 
+    - rstudio_workbench_openid_client_secret is defined 
   tags:
     - rstudio-workbench-configure-openid
 
@@ -53,7 +55,9 @@
     group: root
     state: link
   notify: restart rstudio-workbench
-  when: (rstudio_workbench_env_vars_file_path is defined and rstudio_workbench_env_vars_file_path|length) and rstudio_workbench_env_vars|length == 0
+  when: 
+    - rstudio_workbench_env_vars_file_path is defined 
+    - rstudio_workbench_env_vars is not defined
   tags:
     - rstudio-workbench-configure-env-vars
 
@@ -65,7 +69,7 @@
     group: root
     mode: 0644
   notify: restart rstudio-workbench
-  when: rstudio_workbench_env_vars is defined and rstudio_workbench_env_vars|length
+  when: rstudio_workbench_env_vars is defined 
   tags:
     - rstudio-workbench-configure-env-vars
 
