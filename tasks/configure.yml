@@ -21,6 +21,20 @@
   tags:
     - rstudio-workbench-configure-session
 
+- name: configure | create (database) configuration file
+  template:
+    src: etc/rstudio/database.conf.j2
+    dest: /etc/rstudio/database.conf
+    owner: root
+    group: root
+    mode: 0644
+  notify: restart rstudio-workbench
+  when:
+    - rstudio_workbench_database_config_override is defined
+    - rstudio_workbench_database_config_override|length
+  tags:
+    - rstudio-workbench-configure-database
+
 - name: configure | create (load-balancer) configuration file
   template:
     src: etc/rstudio/load-balancer.j2
