@@ -4,10 +4,11 @@ rstudio_workbench_version: "2021.09.0-351.pro6"
 rstudio_workbench_install: []
 
 rstudio_workbench_www_port: 8787
+rstudio_workbench_health_check_enabled: 0
 
 rstudio_workbench_rserver_config_override: |
   www-port={{ rstudio_workbench_www_port }}
-  server-health-check-enabled=1
+  server-health-check-enabled={{ rstudio_workbench_health_check_enabled }}
 
 rstudio_workbench_rsession_config_override: ""
 
