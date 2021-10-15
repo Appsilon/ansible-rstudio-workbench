@@ -46,6 +46,24 @@
   when:
     - rstudio_workbench_load_balancer_config_override is defined
     - rstudio_workbench_load_balancer_config_override|length
+    - rstudio_workbench_secure_cookie_key is defined
+    - rstudio_workbench_secure_cookie_key|length
+  tags:
+    - rstudio-workbench-configure-load-balancer
+
+- name: configure | create (secure-cookie-key) file
+  copy:
+    content: "{{ rstudio_workbench_secure_cookie_key }}"
+    dest: /etc/rstudio/secure_cookie_key
+    owner: root
+    group: root
+    mode: 0600
+  notify: restart rstudio-workbench
+  when:
+    - rstudio_workbench_load_balancer_config_override is defined
+    - rstudio_workbench_load_balancer_config_override|length
+    - rstudio_workbench_secure_cookie_key is defined
+    - rstudio_workbench_secure_cookie_key|length
   tags:
     - rstudio-workbench-configure-load-balancer
 
@@ -90,7 +108,7 @@
   notify: restart rstudio-workbench
   when:
     - rstudio_workbench_env_vars is defined
-    - rstudio_workbench_env_vars|length > 0
+    - rstudio_workbench_env_vars|length
   tags:
     - rstudio-workbench-configure-env-vars
 
