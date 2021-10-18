@@ -14,7 +14,7 @@
 - name: configure | create (secure-cookie-key) file
   copy:
     content: "{{ rstudio_workbench_secure_cookie_key }}"
-    dest: /etc/rstudio/secure_cookie_key
+    dest: /etc/rstudio/secure-cookie-key
     owner: root
     group: root
     mode: 0600
