@@ -35,35 +35,15 @@
   tags:
     - rstudio-workbench-configure-database
 
-- name: configure | create (load-balancer) configuration file
-  template:
-    src: etc/rstudio/load-balancer.j2
-    dest: /etc/rstudio/load-balancer
-    owner: root
-    group: root
-    mode: 0644
-  notify: restart rstudio-workbench
+- include: configure-lb.yml
   when:
     - rstudio_workbench_load_balancer_config_override is defined
     - rstudio_workbench_load_balancer_config_override|length
+    - rstudio_workbench_database_config_override is defined
+    - rstudio_workbench_database_config_override|length
     - rstudio_workbench_secure_cookie_key is defined
     - rstudio_workbench_secure_cookie_key|length
-  tags:
-    - rstudio-workbench-configure-load-balancer
-
-- name: configure | create (secure-cookie-key) file
-  copy:
-    content: "{{ rstudio_workbench_secure_cookie_key }}"
-    dest: /etc/rstudio/secure_cookie_key
-    owner: root
-    group: root
-    mode: 0600
   notify: restart rstudio-workbench
-  when:
-    - rstudio_workbench_load_balancer_config_override is defined
-    - rstudio_workbench_load_balancer_config_override|length
-    - rstudio_workbench_secure_cookie_key is defined
-    - rstudio_workbench_secure_cookie_key|length
   tags:
     - rstudio-workbench-configure-load-balancer
 
