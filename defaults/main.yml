@@ -6,19 +6,9 @@ rstudio_workbench_install: []
 rstudio_workbench_www_port: 8787
 rstudio_workbench_health_check_enabled: 0
 
-rstudio_workbench_rserver_config_override: |
-  www-port={{ rstudio_workbench_www_port }}
-  server-health-check-enabled={{ rstudio_workbench_health_check_enabled }}
+rstudio_workbench_rserver_config:
+  www-port: "{{ rstudio_workbench_www_port }}"
+  server-health-check-enabled: "{{ rstudio_workbench_health_check_enabled }}"
 
-rstudio_workbench_rsession_config_override: ""
-
-rstudio_workbench_load_balancer_config_override: ""
-rstudio_workbench_secure_cookie_key: ""
-
-rstudio_workbench_openid_client_id: ""
-rstudio_workbench_openid_client_secret: ""
-
-rstudio_workbench_env_vars_file_path: ""
-rstudio_workbench_env_vars: ""
-
-rstudio_workbench_database_config_override: ""
+rstudio_workbench_rsession_config:
+  session-timeout-minutes: 30

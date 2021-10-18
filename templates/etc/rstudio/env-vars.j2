@@ -1,5 +1,6 @@
 {{ ansible_managed | comment }}
 
-{% if rstudio_workbench_env_vars is defined and rstudio_workbench_env_vars|length %}
-{{ rstudio_workbench_env_vars }}
+{% if rstudio_workbench_env_vars is defined %}
+{% from "macros/ini_encode_macro.j2" import ini_encode with context -%}
+{{ ini_encode(rstudio_workbench_env_vars) }}
 {% endif %}
