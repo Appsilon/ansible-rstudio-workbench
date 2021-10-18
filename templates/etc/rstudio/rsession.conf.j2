@@ -1,5 +1,6 @@
 {{ ansible_managed | comment }}
 
-{% if rstudio_workbench_rsession_config_override is defined and rstudio_workbench_rsession_config_override|length %}
-{{ rstudio_workbench_rsession_config_override }}
+{% if rstudio_workbench_rsession_config is defined %}
+{% from "macros/ini_encode_macro.j2" import ini_encode with context -%}
+{{ ini_encode(rstudio_workbench_rsession_config) }}
 {% endif %}

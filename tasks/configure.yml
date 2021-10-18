@@ -30,17 +30,14 @@
     mode: 0644
   notify: restart rstudio-workbench
   when:
-    - rstudio_workbench_database_config_override is defined
-    - rstudio_workbench_database_config_override|length
+    - rstudio_workbench_database_config is defined
   tags:
     - rstudio-workbench-configure-database
 
 - include: configure-lb.yml
   when:
-    - rstudio_workbench_load_balancer_config_override is defined
-    - rstudio_workbench_load_balancer_config_override|length
-    - rstudio_workbench_database_config_override is defined
-    - rstudio_workbench_database_config_override|length
+    - rstudio_workbench_load_balancer_config is defined
+    - rstudio_workbench_database_config is defined
     - rstudio_workbench_secure_cookie_key is defined
     - rstudio_workbench_secure_cookie_key|length
   notify: restart rstudio-workbench
@@ -56,10 +53,7 @@
     mode: 0600
   notify: restart rstudio-workbench
   when:
-    - rstudio_workbench_openid_client_id is defined
-    - rstudio_workbench_openid_client_id|length
-    - rstudio_workbench_openid_client_secret is defined
-    - rstudio_workbench_openid_client_secret|length
+    - rstudio_workbench_openid_config is defined
   tags:
     - rstudio-workbench-configure-openid
 
@@ -74,7 +68,7 @@
   when:
     - rstudio_workbench_env_vars_file_path is defined
     - rstudio_workbench_env_vars_file_path|length
-    - rstudio_workbench_env_vars is not defined or rstudio_workbench_env_vars|length == 0
+    - rstudio_workbench_env_vars is not defined
   tags:
     - rstudio-workbench-configure-env-vars
 
@@ -88,7 +82,6 @@
   notify: restart rstudio-workbench
   when:
     - rstudio_workbench_env_vars is defined
-    - rstudio_workbench_env_vars|length
   tags:
     - rstudio-workbench-configure-env-vars
 
