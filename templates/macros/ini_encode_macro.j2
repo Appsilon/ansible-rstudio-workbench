@@ -7,10 +7,8 @@
       delimiter="=" ) %}
 
 	{%- for property, value in item.items() | sort %}
-		{%- if value is string and value|length -%}
+		{%- (if value is string and value|length) or value is number -%}
 			{{ property ~ delimiter ~ value ~ "\n" }}
-		{%- elif value is number -%}
-				{{ property ~ delimiter ~ value ~ "\n" }}
 		{%- endif %}
 	{%- endfor %}
 {%- endmacro %}
