@@ -44,16 +44,13 @@
   tags:
     - rstudio-workbench-configure-load-balancer
 
-- name: Create a sub-directories used by workbench
+- name: Make sure shared-storage directory exists
   file:
-    path: "{{ rstudio_workbench_nfs_mount_path }}/workbench/{{ item }}"
+    path: "{{ rstudio_workbench_rserver_config['server-shared-storage-path'] }}"
     state: directory
     mode: 0755
-  loop:
-    - "home"
-    - "shared-storage"
   when:
-    - rstudio_workbench_nfs_mount_path is defined
+    - rstudio_workbench_rserver_config['server-shared-storage-path'] is defined
 
 - name: configure | create (openid) configuration file
   template:
