@@ -44,6 +44,25 @@
   tags:
     - rstudio-workbench-configure-load-balancer
 
+- name: Create a directory for workbench in EFS
+  file:
+    path: "{{ rstudio_workbench_nfs_mount_path }}/workbench"
+    state: directory
+    mode: 0755
+  when:
+    - rstudio_workbench_nfs_mount_path is defined
+
+- name: Create a sub-directories used by workbench
+  file:
+    path: "{{ rstudio_workbench_nfs_mount_path }}/workbench/{{ item }}"
+    state: directory
+    mode: 0755
+  loop:
+    - "home"
+    - "shared-storage"
+  when:
+    - rstudio_workbench_nfs_mount_path is defined
+
 - name: configure | create (openid) configuration file
   template:
     src: etc/rstudio/openid-client-secret.j2

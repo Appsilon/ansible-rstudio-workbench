@@ -4,3 +4,7 @@
 {% from "macros/ini_encode_macro.j2" import ini_encode with context -%}
 {{ ini_encode(rstudio_workbench_rserver_config) }}
 {% endif %}
+
+{% if rstudio_workbench_nfs_mount_path is defined and rstudio_workbench_nfs_mount_path|length %}
+server-shared-storage-path: "{{ rstudio_workbench_nfs_mount_path }}/workbench/shared-storage"
+{% endif %}
