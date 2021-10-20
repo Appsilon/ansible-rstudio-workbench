@@ -52,6 +52,14 @@
   when:
     - rstudio_workbench_rserver_config['server-shared-storage-path'] is defined
 
+- name: Make sure shared users home directory exists
+  file:
+    path: "{{ rstudio_workbench_users_home_dir }}"
+    state: directory
+    mode: 0755
+  when:
+    - rstudio_workbench_users_home_dir is defined
+
 - name: configure | create (openid) configuration file
   template:
     src: etc/rstudio/openid-client-secret.j2
