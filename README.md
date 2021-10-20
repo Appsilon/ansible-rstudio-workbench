@@ -24,7 +24,6 @@ Set up (the latest version of) [RStudio Workbench](https://www.rstudio.com/produ
 * `rstudio_workbench_env_vars`: If specified (map), will add key=value records to `openid-client-secret`.
 * `rstudio_workbench_load_balancer_config`: If specified (map), will add key=value records to `load-balancer`.
 * `rstudio_workbench_license`: If specified, RStudio Workbench will attempt to activate the supplied license key.
-* `rstudio_workbench_nfs_mount_path`: If specified, `workbench` directory with `shared-storage` and `home` dirs inside will be created and added to `rserver.conf` file. Remember to configure your PAM users home directory in `"{{ rstudio_workbench_nfs_mount_path }}/workbench/home"`
 
 For the rest of the default variables, see
 [./defaults/main.yml](./defaults/main.yml).
