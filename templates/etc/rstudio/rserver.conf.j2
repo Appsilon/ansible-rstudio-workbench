@@ -6,5 +6,5 @@
 {% endif %}
 
 {% if rstudio_workbench_nfs_mount_path is defined and rstudio_workbench_nfs_mount_path|length %}
-server-shared-storage-path: "{{ rstudio_workbench_nfs_mount_path }}/workbench/shared-storage"
+server-shared-storage-path="{{ rstudio_workbench_nfs_mount_path }}/workbench/shared-storage"
 {% endif %}
