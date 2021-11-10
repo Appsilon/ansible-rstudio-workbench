@@ -60,6 +60,19 @@
   when:
     - rstudio_workbench_users_home_dir is defined
 
+- include: configure-launcher.yml
+  when:
+    - rstudio_workbench_launcher_pem is defined
+    - rstudio_workbench_launcher_pub is defined
+    - rstudio_workbench_launcher_server_config is defined
+    - rstudio_workbench_launcher_mounts_config is defined
+    - rstudio_workbench_launcher_kubernetes_config is defined
+    - rstudio_workbench_launcher_kubernetes_profiles_config is defined
+    - rstudio_workbench_launcher_kubernetes_cluster_config is defined or rstudio_workbench_launcher_local_cluster_config is defined or rstudio_workbench_launcher_slurm_cluster_config is defined
+  notify: restart rstudio-workbench
+  tags:
+    - rstudio-workbench-configure-kubernetes
+
 - name: configure | create (openid) configuration file
   template:
     src: etc/rstudio/openid-client-secret.j2

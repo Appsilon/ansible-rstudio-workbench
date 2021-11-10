@@ -1,0 +1,78 @@
+---
+
+- name: configure | update (launcher-env) configuration file
+  template:
+    src: etc/rstudio/launcher-env.j2
+    dest: /etc/rstudio/launcher-env
+    owner: root
+    group: root
+    mode: 0644
+  notify: restart rstudio-workbench
+  tags:
+    - rstudio-workbench-configure-launcher
+
+- name: configure | update (launcher-mounts) configuration file
+  template:
+    src: etc/rstudio/launcher-mounts.j2
+    dest: /etc/rstudio/launcher-mounts
+    owner: root
+    group: root
+    mode: 0644
+  notify: restart rstudio-workbench
+  tags:
+    - rstudio-workbench-configure-launcher
+
+- name: configure | update (launcher) configuration file
+  template:
+    src: etc/rstudio/launcher.conf.j2
+    dest: /etc/rstudio/launcher.conf
+    owner: root
+    group: root
+    mode: 0644
+  notify: restart rstudio-workbench
+  tags:
+    - rstudio-workbench-configure-launcher
+
+- name: configure | update (launcher kubernetes) configuration file
+  template:
+    src: etc/rstudio/launcher.kubernetes.conf.j2
+    dest: /etc/rstudio/launcher.kubernetes.conf
+    owner: root
+    group: root
+    mode: 0644
+  notify: restart rstudio-workbench
+  tags:
+    - rstudio-workbench-configure-launcher
+
+- name: configure | update (launcher kubernetes profiles) configuration file
+  template:
+    src: etc/rstudio/launcher.kubernetes.profiles.conf.j2
+    dest: /etc/rstudio/launcher.kubernetes.profiles.conf
+    owner: root
+    group: root
+    mode: 0644
+  notify: restart rstudio-workbench
+  tags:
+    - rstudio-workbench-configure-launcher
+
+- name: configure | create (RSA launcher key) file
+  copy:
+    content: "{{ rstudio_workbench_launcher_pem }}"
+    dest: /etc/rstudio/launcher.pem
+    owner: root
+    group: root
+    mode: 0600
+  notify: restart rstudio-workbench
+  tags:
+    - rstudio-workbench-configure-load-balancer
+
+- name: configure | create (secure-cookie-key) file
+  copy:
+    content: "{{ rstudio_workbench_launcher_pub }}"
+    dest: /etc/rstudio/launcher.pub
+    owner: root
+    group: root
+    mode: 0600
+  notify: restart rstudio-workbench
+  tags:
+    - rstudio-workbench-configure-load-balancer
