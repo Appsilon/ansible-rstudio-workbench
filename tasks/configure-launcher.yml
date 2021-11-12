@@ -55,7 +55,7 @@
   tags:
     - rstudio-workbench-configure-launcher
 
-- name: configure | create (RSA launcher key) file
+- name: configure | create (RSA launcher private key) file
   copy:
     content: "{{ rstudio_workbench_launcher_pem }}"
     dest: /etc/rstudio/launcher.pem
@@ -64,9 +64,9 @@
     mode: 0600
   notify: restart rstudio-workbench
   tags:
-    - rstudio-workbench-configure-load-balancer
+    - rstudio-workbench-configure-launcher
 
-- name: configure | create (secure-cookie-key) file
+- name: configure | create (RSA launcher public key) file
   copy:
     content: "{{ rstudio_workbench_launcher_pub }}"
     dest: /etc/rstudio/launcher.pub
@@ -75,4 +75,4 @@
     mode: 0600
   notify: restart rstudio-workbench
   tags:
-    - rstudio-workbench-configure-load-balancer
+    - rstudio-workbench-configure-launcher
