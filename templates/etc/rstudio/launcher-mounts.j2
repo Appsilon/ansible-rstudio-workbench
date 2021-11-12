@@ -1,6 +1,7 @@
 {{ ansible_managed | comment }}
 
-{% if rstudio_workbench_launcher_mounts_config is defined%}
-{% from "macros/ini_encode_macro.j2" import ini_encode with context -%}
-{{ ini_encode(rstudio_workbench_launcher_mounts_config) }}
-{% endif %}
+{% if rstudio_workbench_launcher_mounts_config is defined %}
+	{%- for property, value in rstudio_workbench_launcher_mounts_config.items() -%}
+		{{ property ~ ": " ~ value ~ "\n" }}
+	{%- endfor -%}
+{%- endif -%}
