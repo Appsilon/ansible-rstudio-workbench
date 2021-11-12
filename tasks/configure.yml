@@ -27,7 +27,7 @@
     dest: /etc/rstudio/database.conf
     owner: root
     group: root
-    mode: 0644
+    mode: 0600
   notify: restart rstudio-workbench
   when:
     - rstudio_workbench_database_config is defined
