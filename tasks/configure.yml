@@ -71,7 +71,7 @@
     - rstudio_workbench_launcher_kubernetes_cluster_config is defined or rstudio_workbench_launcher_local_cluster_config is defined or rstudio_workbench_launcher_slurm_cluster_config is defined
   notify: restart rstudio-workbench
   tags:
-    - rstudio-workbench-configure-kubernetes
+    - rstudio-workbench-configure-launcher
 
 - name: configure | create (openid) configuration file
   template:
