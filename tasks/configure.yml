@@ -105,7 +105,8 @@
   shell: |
     /usr/sbin/rstudio-server license-manager activate {{ rstudio_workbench_license }}
   notify: restart rstudio-server
-  when: rstudio_workbench_manager_license|d()
+  when: rstudio_workbench_license|d()
+  no_log: true
   register: license_output
   tags:
-    - rstudio-workbench-configure-migration
+    - rstudio-workbench-configure-license
