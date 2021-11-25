@@ -22,6 +22,17 @@
   tags:
     - rstudio-workbench-configure-launcher
 
+- name: configure | update (launcher-ports) configuration file
+  template:
+    src: etc/rstudio/launcher-ports.j2
+    dest: /etc/rstudio/launcher-ports
+    owner: root
+    group: root
+    mode: 0644
+  notify: restart rstudio-workbench
+  tags:
+    - rstudio-workbench-configure-launcher
+
 - name: configure | update (launcher) configuration file
   template:
     src: etc/rstudio/launcher.conf.j2
@@ -57,7 +68,7 @@
 
 - name: configure | create (RSA launcher private key) file
   copy:
-    content: "{{ rstudio_workbench_launcher_pem }}"
+    content: "{{ rstudio_workbench_launcher_pem_b64_encoded | b64decode }}"
     dest: /etc/rstudio/launcher.pem
     owner: root
     group: root
@@ -68,7 +79,7 @@
 
 - name: configure | create (RSA launcher public key) file
   copy:
-    content: "{{ rstudio_workbench_launcher_pub }}"
+    content: "{{ rstudio_workbench_launcher_pub_b64_encoded | b64decode }}"
     dest: /etc/rstudio/launcher.pub
     owner: root
     group: root

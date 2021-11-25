@@ -158,5 +158,5 @@ rstudio_workbench_launcher_ports_config:
 # /etc/rstudio/launcher.pem + launcher.pub
 ############################################################
 
-rstudio_workbench_launcher_pem: "private_key"
-rstudio_workbench_launcher_pub: "public_key"
+rstudio_workbench_launcher_pem_b64_encoded: "private_key_base64_encoded"
+rstudio_workbench_launcher_pub_b64_encoded: "public_key_base64_encoded"

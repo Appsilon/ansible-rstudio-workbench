@@ -62,8 +62,8 @@
 
 - include: configure-launcher.yml
   when:
-    - rstudio_workbench_launcher_pem is defined
-    - rstudio_workbench_launcher_pub is defined
+    - rstudio_workbench_launcher_pem_b64_encoded is defined
+    - rstudio_workbench_launcher_pub_b64_encoded is defined
     - rstudio_workbench_launcher_server_config is defined
     - rstudio_workbench_launcher_mounts_config is defined
     - rstudio_workbench_launcher_kubernetes_config is defined
