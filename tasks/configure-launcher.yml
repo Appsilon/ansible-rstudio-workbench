@@ -7,9 +7,6 @@
     owner: root
     group: root
     mode: 0644
-  notify: restart rstudio-workbench
-  tags:
-    - rstudio-workbench-configure-launcher
 
 - name: configure | update (launcher-mounts) configuration file
   template:
@@ -18,9 +15,6 @@
     owner: root
     group: root
     mode: 0644
-  notify: restart rstudio-workbench
-  tags:
-    - rstudio-workbench-configure-launcher
 
 - name: configure | update (launcher-ports) configuration file
   template:
@@ -29,9 +23,6 @@
     owner: root
     group: root
     mode: 0644
-  notify: restart rstudio-workbench
-  tags:
-    - rstudio-workbench-configure-launcher
 
 - name: configure | update (launcher) configuration file
   template:
@@ -40,9 +31,6 @@
     owner: root
     group: root
     mode: 0644
-  notify: restart rstudio-workbench
-  tags:
-    - rstudio-workbench-configure-launcher
 
 - name: configure | update (launcher kubernetes) configuration file
   template:
@@ -51,9 +39,6 @@
     owner: root
     group: root
     mode: 0644
-  notify: restart rstudio-workbench
-  tags:
-    - rstudio-workbench-configure-launcher
 
 - name: configure | update (launcher kubernetes profiles) configuration file
   template:
@@ -62,9 +47,6 @@
     owner: root
     group: root
     mode: 0644
-  notify: restart rstudio-workbench
-  tags:
-    - rstudio-workbench-configure-launcher
 
 - name: configure | create (RSA launcher private key) file
   copy:
@@ -73,9 +55,8 @@
     owner: root
     group: root
     mode: 0600
-  notify: restart rstudio-workbench
-  tags:
-    - rstudio-workbench-configure-launcher
+  when:
+    - rstudio_workbench_launcher_pem_b64_encoded is defined
 
 - name: configure | create (RSA launcher public key) file
   copy:
@@ -84,6 +65,5 @@
     owner: root
     group: root
     mode: 0600
-  notify: restart rstudio-workbench
-  tags:
-    - rstudio-workbench-configure-launcher
+  when:
+    - rstudio_workbench_launcher_pub_b64_encoded is defined

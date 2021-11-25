@@ -2,22 +2,22 @@
 
 {% from "macros/ini_encode_macro.j2" import ini_encode with context -%}
 
-{% if rstudio_workbench_launcher_server_config is defined%}
+{% if rstudio_workbench_launcher_server_config is defined %}
 [server]
 {{ ini_encode(rstudio_workbench_launcher_server_config) }}
 {% endif %}
 
-{% if rstudio_workbench_launcher_kubernetes_cluster_config is defined%}
+{% if rstudio_workbench_launcher_kubernetes_cluster_config is defined %}
 [cluster]
 {{ ini_encode(rstudio_workbench_launcher_kubernetes_cluster_config) }}
 {% endif %}
 
-{% if rstudio_workbench_launcher_local_cluster_config is defined%}
+{% if rstudio_workbench_launcher_local_cluster_config is defined %}
 [cluster]
 {{ ini_encode(rstudio_workbench_launcher_local_cluster_config) }}
 {% endif %}
 
-{% if rstudio_workbench_launcher_slurm_cluster_config is defined%}
+{% if rstudio_workbench_launcher_slurm_cluster_config is defined %}
 [cluster]
 {{ ini_encode(rstudio_workbench_launcher_slurm_cluster_config) }}
 {% endif %}

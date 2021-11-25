@@ -1,6 +1,6 @@
 {{ ansible_managed | comment }}
 
-{% if rstudio_workbench_launcher_ports_config is defined%}
+{% if rstudio_workbench_launcher_ports_config is defined %}
 	{%- for port in rstudio_workbench_launcher_ports_config -%}
 		{{ port ~ "\n" }}
 	{%- endfor -%}

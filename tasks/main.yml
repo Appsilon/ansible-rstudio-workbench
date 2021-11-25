@@ -23,6 +23,7 @@
     - configuration
     - rstudio-workbench
     - rstudio-workbench-configure
+  notify: restart rstudio-workbench
 
 - include: install-r.yml
   tags:
