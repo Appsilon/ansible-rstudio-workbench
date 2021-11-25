@@ -31,59 +31,59 @@ rstudio_workbench_rsession_config:
 #
 ############################################################
 
-rstudio_workbench_database_config:
-  provider: "postgresql"
-  host: "host"
-  database: "rstudio"
-  port: "5432"
-  username: "rstudio"
-  password: "password"
+# rstudio_workbench_database_config:
+#   provider: "postgresql"
+#   host: "host"
+#   database: "rstudio"
+#   port: "5432"
+#   username: "rstudio"
+#   password: "password"
 
 ############################################################
 # /etc/rstudio/load-balancer
 ############################################################
 
-rstudio_workbench_load_balancer_config:
-  balancer: "sessions"
+# rstudio_workbench_load_balancer_config:
+#   balancer: "sessions"
 
 ############################################################
 # /etc/rstudio/openid-client-secret
 ############################################################
 
-rstudio_workbench_openid_config:
-  client-id: "my_client_id"
-  client-secret: "my_client_secret"
+# rstudio_workbench_openid_config:
+#   client-id: "my_client_id"
+#   client-secret: "my_client_secret"
 
 ############################################################
 # /etc/rstudio/env-vars
 ############################################################
 
-rstudio_workbench_env_vars_file_path: "/etc/environment"
+# rstudio_workbench_env_vars_file_path: "/etc/environment"
 
 ############################################################
 # /etc/rstudio/secure-cookie-key
 ############################################################
 
-rstudio_workbench_secure_cookie_key: "my_security_key"
+# rstudio_workbench_secure_cookie_key: "my_security_key"
 
 ############################################################
 # /etc/rstudio/launcher-env
 ############################################################
 
-rstudio_workbench_launcher_env_config:
-  my_var: "my_value"
+# rstudio_workbench_launcher_env_config:
+#   my_var: "my_value"
 
 ############################################################
 # /etc/rstudio/profiles
 ############################################################
 
-rstudio_profiles_config:
-  '*':
-    max-processes: "800"
-    max-memory-mb: "2048"
-    session-limit: "5"
-    session-timeout-minutes: "60"
-    session-timeout-kill-hours: "24"
+# rstudio_profiles_config:
+#   '*':
+#     max-processes: "800"
+#     max-memory-mb: "2048"
+#     session-limit: "5"
+#     session-timeout-minutes: "60"
+#     session-timeout-kill-hours: "24"
 
 ############################################################
 # /etc/rstudio/launcher.conf
@@ -95,68 +95,68 @@ rstudio_profiles_config:
 #   - rstudio_workbench_launcher_kubernetes_cluster_config
 ############################################################
 
-rstudio_workbench_launcher_server_config:
-  address: "localhost"
-  port: "5559"
-  server-user: "rstudio-server"
-  admin-group: "rstudio-server"
-  enable-debug-logging: "1"
-  authorization-enabled: "1"
-  thread-pool-size: "4"
-
-rstudio_workbench_launcher_kubernetes_cluster_config:
-  name: "Kubernetes"
-  type: "Kubernetes"
-
-rstudio_workbench_launcher_local_cluster_config:
-  name: "Local"
-  type: "Local"
+# rstudio_workbench_launcher_server_config:
+#   address: "localhost"
+#   port: "5559"
+#   server-user: "rstudio-server"
+#   admin-group: "rstudio-server"
+#   enable-debug-logging: "1"
+#   authorization-enabled: "1"
+#   thread-pool-size: "4"
+#
+# rstudio_workbench_launcher_kubernetes_cluster_config:
+#   name: "Kubernetes"
+#   type: "Kubernetes"
+#
+# rstudio_workbench_launcher_local_cluster_config:
+#   name: "Local"
+#   type: "Local"
 
 ############################################################
 # /etc/rstudio/launcher.kubernetes.conf
 ############################################################
 
-rstudio_workbench_launcher_kubernetes_config:
-  api-url: "url"
-  auth-token: "token"
-  certificate-authority: "cert"
+# rstudio_workbench_launcher_kubernetes_config:
+#   api-url: "url"
+#   auth-token: "token"
+#   certificate-authority: "cert"
 
 ############################################################
 # /etc/rstudio/launcher.kubernetes.profiles.conf
 ############################################################
 
-rstudio_workbench_launcher_kubernetes_profiles_config:
-  '*':
-    default-cpus: "1"
-    default-mem-mb: "512"
-    max-cpus: "2"
-    max-mem-mb: "1024"
-    container-images: "rstudio/r-session-complete:centos7-2021.09.0-351.pro6"
-    default-container-image: "rstudio/r-session-complete:centos7-2021.09.0-351.pro6"
-    allow-unknown-images: "0"
+# rstudio_workbench_launcher_kubernetes_profiles_config:
+#   '*':
+#     default-cpus: "1"
+#     default-mem-mb: "512"
+#     max-cpus: "2"
+#     max-mem-mb: "1024"
+#     container-images: "rstudio/r-session-complete:centos7-2021.09.0-351.pro6"
+#     default-container-image: "rstudio/r-session-complete:centos7-2021.09.0-351.pro6"
+#     allow-unknown-images: "0"
 
 ############################################################
 # /etc/rstudio/launcher-mounts
 ############################################################
 
-rstudio_workbench_launcher_mounts_config:
-  Path: "/home/{USER}"
-  MountPath: "/home/{USER}"
-  MountType: "NFS"
-  ReadOnly: "false"
-  Cluster: "Kubernetes"
+# rstudio_workbench_launcher_mounts_config:
+#   Path: "/home/{USER}"
+#   MountPath: "/home/{USER}"
+#   MountType: "NFS"
+#   ReadOnly: "false"
+#   Cluster: "Kubernetes"
 
 ############################################################
 # /etc/rstudio/launcher-ports
 ############################################################
 
-rstudio_workbench_launcher_ports_config:
-  - 80
-  - 443
+# rstudio_workbench_launcher_ports_config:
+#   - 80
+#   - 443
 
 ############################################################
 # /etc/rstudio/launcher.pem + launcher.pub
 ############################################################
 
-rstudio_workbench_launcher_pem_b64_encoded: "private_key_base64_encoded"
-rstudio_workbench_launcher_pub_b64_encoded: "public_key_base64_encoded"
+# rstudio_workbench_launcher_pem_b64_encoded: "UGxhY2UgYmFzZTY0IGVuY29kZWQgcHJpdmF0ZSBrZXkgaGVyZQo="
+# rstudio_workbench_launcher_pub_b64_encoded: "UGxhY2UgYmFzZTY0IGVuY29kZWQgcHVibGljIGtleSBoZXJlCg=="
