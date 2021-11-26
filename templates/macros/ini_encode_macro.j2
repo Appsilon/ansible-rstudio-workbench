@@ -6,9 +6,9 @@
       item,
       delimiter="=" ) %}
 
-	{%- for property, value in item.items() | sort %}
-		{%- if value is number or (value is string and value|length) %}
+  {%- for property, value in item.items() | sort %}
+    {%- if value is number or (value is string and value|length) %}
 {{ property ~ delimiter ~ value ~ "\n" }}
-		{%- endif %}
-	{%- endfor %}
+    {%- endif %}
+  {%- endfor %}
 {%- endmacro %}

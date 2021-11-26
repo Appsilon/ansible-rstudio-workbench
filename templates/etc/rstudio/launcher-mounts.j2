@@ -1,0 +1,7 @@
+{{ ansible_managed | comment }}
+
+{% if rstudio_workbench_launcher_mounts_config is defined %}
+	{%- for property, value in rstudio_workbench_launcher_mounts_config.items() -%}
+		{{ property ~ ": " ~ value ~ "\n" }}
+	{%- endfor -%}
+{%- endif -%}

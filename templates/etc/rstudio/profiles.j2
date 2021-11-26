@@ -1,0 +1,6 @@
+{{ ansible_managed | comment }}
+
+{% if rstudio_workbench_profiles_config is defined %}
+{% from "macros/ini_sections_encode_macro.j2" import ini_sections_encode with context -%}
+{{ ini_sections_encode(rstudio_workbench_profiles_config) }}
+{% endif %}

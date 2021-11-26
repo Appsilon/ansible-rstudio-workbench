@@ -6,7 +6,6 @@
     owner: root
     group: root
     mode: 0644
-  notify: restart rstudio-workbench
   tags:
     - rstudio-workbench-configure-server
 
@@ -17,7 +16,6 @@
     owner: root
     group: root
     mode: 0644
-  notify: restart rstudio-workbench
   tags:
     - rstudio-workbench-configure-session
 
@@ -27,8 +25,7 @@
     dest: /etc/rstudio/database.conf
     owner: root
     group: root
-    mode: 0644
-  notify: restart rstudio-workbench
+    mode: 0600
   when:
     - rstudio_workbench_database_config is defined
   tags:
@@ -40,11 +37,10 @@
     - rstudio_workbench_database_config is defined
     - rstudio_workbench_secure_cookie_key is defined
     - rstudio_workbench_secure_cookie_key|length
-  notify: restart rstudio-workbench
   tags:
     - rstudio-workbench-configure-load-balancer
 
-- name: Make sure shared-storage directory exists
+- name: configure | make sure shared-storage directory exists
   file:
     path: "{{ rstudio_workbench_rserver_config['server-shared-storage-path'] }}"
     state: directory
@@ -52,13 +48,19 @@
   when:
     - rstudio_workbench_rserver_config['server-shared-storage-path'] is defined
 
-- name: Make sure shared users home directory exists
+- name: configure | make sure shared users home directory exists
   file:
     path: "{{ rstudio_workbench_users_home_dir }}"
     state: directory
     mode: 0755
   when:
     - rstudio_workbench_users_home_dir is defined
+
+- include: configure-launcher.yml
+  notify:
+    - restart rstudio-job-launcher
+  tags:
+    - rstudio-workbench-configure-launcher
 
 - name: configure | create (openid) configuration file
   template:
@@ -67,7 +69,6 @@
     owner: root
     group: root
     mode: 0600
-  notify: restart rstudio-workbench
   when:
     - rstudio_workbench_openid_config is defined
   tags:
@@ -80,7 +81,6 @@
     owner: root
     group: root
     state: link
-  notify: restart rstudio-workbench
   when:
     - rstudio_workbench_env_vars_file_path is defined
     - rstudio_workbench_env_vars_file_path|length
@@ -95,7 +95,6 @@
     owner: root
     group: root
     mode: 0644
-  notify: restart rstudio-workbench
   when:
     - rstudio_workbench_env_vars is defined
   tags:
@@ -104,7 +103,7 @@
 - name: configure | activate server license
   shell: |
     /usr/sbin/rstudio-server license-manager activate {{ rstudio_workbench_license }}
-  notify: restart rstudio-server
+  notify: restart rstudio-workbench
   when: rstudio_workbench_license|d()
   no_log: true
   register: license_output
