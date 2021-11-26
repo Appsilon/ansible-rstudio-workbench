@@ -6,7 +6,6 @@
     owner: root
     group: root
     mode: 0644
-  notify: restart rstudio-workbench
   tags:
     - rstudio-workbench-configure-server
 
@@ -17,7 +16,6 @@
     owner: root
     group: root
     mode: 0644
-  notify: restart rstudio-workbench
   tags:
     - rstudio-workbench-configure-session
 
@@ -28,7 +26,6 @@
     owner: root
     group: root
     mode: 0600
-  notify: restart rstudio-workbench
   when:
     - rstudio_workbench_database_config is defined
   tags:
@@ -40,11 +37,10 @@
     - rstudio_workbench_database_config is defined
     - rstudio_workbench_secure_cookie_key is defined
     - rstudio_workbench_secure_cookie_key|length
-  notify: restart rstudio-workbench
   tags:
     - rstudio-workbench-configure-load-balancer
 
-- name: Make sure shared-storage directory exists
+- name: configure | make sure shared-storage directory exists
   file:
     path: "{{ rstudio_workbench_rserver_config['server-shared-storage-path'] }}"
     state: directory
@@ -52,7 +48,7 @@
   when:
     - rstudio_workbench_rserver_config['server-shared-storage-path'] is defined
 
-- name: Make sure shared users home directory exists
+- name: configure | make sure shared users home directory exists
   file:
     path: "{{ rstudio_workbench_users_home_dir }}"
     state: directory
@@ -61,15 +57,8 @@
     - rstudio_workbench_users_home_dir is defined
 
 - include: configure-launcher.yml
-  when:
-    - rstudio_workbench_launcher_pem_b64_encoded is defined
-    - rstudio_workbench_launcher_pub_b64_encoded is defined
-    - rstudio_workbench_launcher_server_config is defined
-    - rstudio_workbench_launcher_mounts_config is defined
-    - rstudio_workbench_launcher_kubernetes_config is defined
-    - rstudio_workbench_launcher_kubernetes_profiles_config is defined
-    - rstudio_workbench_launcher_kubernetes_cluster_config is defined or rstudio_workbench_launcher_local_cluster_config is defined or rstudio_workbench_launcher_slurm_cluster_config is defined
-  notify: restart rstudio-workbench
+  notify:
+    - restart rstudio-job-launcher
   tags:
     - rstudio-workbench-configure-launcher
 
@@ -80,7 +69,6 @@
     owner: root
     group: root
     mode: 0600
-  notify: restart rstudio-workbench
   when:
     - rstudio_workbench_openid_config is defined
   tags:
@@ -93,7 +81,6 @@
     owner: root
     group: root
     state: link
-  notify: restart rstudio-workbench
   when:
     - rstudio_workbench_env_vars_file_path is defined
     - rstudio_workbench_env_vars_file_path|length
@@ -108,7 +95,6 @@
     owner: root
     group: root
     mode: 0644
-  notify: restart rstudio-workbench
   when:
     - rstudio_workbench_env_vars is defined
   tags:
@@ -117,7 +103,6 @@
 - name: configure | activate server license
   shell: |
     /usr/sbin/rstudio-server license-manager activate {{ rstudio_workbench_license }}
-  notify: restart rstudio-server
   when: rstudio_workbench_manager_license|d()
   register: license_output
   tags:

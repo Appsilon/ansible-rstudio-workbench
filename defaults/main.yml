@@ -2,8 +2,7 @@
 ---
 
 rstudio_workbench_version: "2021.09.0-351.pro6"
-rstudio_workbench_install:
-  - vim
+rstudio_workbench_install: []
 
 rstudio_workbench_www_port: 8787
 rstudio_workbench_health_check_enabled: 0
