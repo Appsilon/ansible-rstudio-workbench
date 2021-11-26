@@ -1,0 +1,23 @@
+{#
+ # Jinja2 macro which converts Ansible map into no section INI format
+ #}
+
+{%- macro ini_sections_encode(
+      item,
+      delimiter="=" ) %}
+
+  {%- for section, options in item.items() | sort %}
+    {%- if options is mapping -%}
+{{ "\n[" ~ section ~ "]\n" }}
+      {%- for property, value in options.items() | sort -%}
+        {%- if value is number or (value is string and value|length) %}
+{{ property ~ delimiter ~ value ~ "\n" }}
+        {%- else %}
+          {%- for v in value -%}
+{{ property ~ delimiter ~ v ~ "\n" }}
+          {%- endfor %}
+        {%- endif %}
+      {%- endfor %}
+    {%- endif %}
+  {%- endfor %}
+{%- endmacro %}
