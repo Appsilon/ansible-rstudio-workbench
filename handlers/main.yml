@@ -11,3 +11,9 @@
     name: rstudio-launcher
     state: restarted
   when: service_default_state | default('started') == 'started'
+
+- name: restart sssd
+  service:
+    name: sssd
+    state: restarted
+  when: service_default_state | default('started') == 'started'

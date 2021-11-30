@@ -43,6 +43,32 @@
   tags:
     - rstudio-workbench-configure-profiles
 
+- name: configure | update pam profile
+  template:
+    src: etc/pam.d/rstudio.j2
+    dest: /etc/pam.d/rstudio
+    owner: root
+    group: root
+    mode: 0644
+  when:
+    - rstudio_workbench_pam_profile is defined
+  tags:
+    - rstudio-workbench-configure-pam-profile
+
+- name: configure | create sssd service config
+  template:
+    src: etc/sssd/sssd.conf.j2
+    dest: /etc/sssd/sssd.conf
+    owner: root
+    group: root
+    mode: 0600
+  notify:
+    - restart sssd
+  when:
+    - rstudio_workbench_sssd_config is defined
+  tags:
+    - rstudio-workbench-configure-sssd
+
 - include: configure-lb.yml
   when:
     - rstudio_workbench_load_balancer_config is defined

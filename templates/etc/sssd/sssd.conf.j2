@@ -1,0 +1,11 @@
+# {{ ansible_managed }}
+
+{% for section in rstudio_workbench_sssd_config.keys() %}
+[{{ section }}]
+{% if rstudio_workbench_sssd_config[section] %}
+{% for key, value in rstudio_workbench_sssd_config[section].items() %}
+{{ key }} = {{ value }}
+{% endfor %}
+{% endif %}
+
+{% endfor %}
