@@ -1,0 +1,5 @@
+{{ ansible_managed | comment }}
+
+{% if rstudio_workbench_pam_profile is defined %}
+{{ rstudio_workbench_pam_profile }}
+{% endif %}

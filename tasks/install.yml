@@ -16,6 +16,23 @@
   tags:
     - rstudio-workbench-install-additional
 
+- name: install | sssd
+  apt:
+    name: "{{ item }}"
+    state: "{{ apt_install_state | default('latest') }}"
+    cache_valid_time: "{{ apt_update_cache_valid_time | default(3600) }}"
+    update_cache: true
+  with_items:
+    - sssd-ad
+    - sssd-tools
+    - sssd-dbus
+    - realmd
+    - adcli
+  when:
+    - rstudio_workbench_sssd_config is defined
+  tags:
+    - rstudio-workbench-configure-sssd
+
 - name: install | create (download) directory
   file:
     path: "{{ rstudio_workbench_downloads_path }}"
