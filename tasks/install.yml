@@ -29,7 +29,8 @@
     - realmd
     - adcli
   when:
-    - rstudio_workbench_sssd_config is defined
+    - rstudio_workbench_sssd_config is defined or
+      rstudio_workbench_sssd_install is sameas true
   tags:
     - rstudio-workbench-configure-sssd
 
