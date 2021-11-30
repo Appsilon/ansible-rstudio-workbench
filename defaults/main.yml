@@ -7,6 +7,8 @@ rstudio_workbench_install: []
 rstudio_workbench_www_port: 8787
 rstudio_workbench_health_check_enabled: 0
 
+rstudio_workbench_sssd_install: false
+
 ############################################################
 # /etc/rstudio/rserver.conf
 ############################################################
