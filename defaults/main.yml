@@ -28,10 +28,10 @@ rstudio_workbench_rsession_config:
 # /etc/rstudio/logging.conf
 ############################################################
 
-rstudio_workbench_logging_config:
-  '*':
-    log-level: "warn"
-    logger-type: "file"
+# rstudio_workbench_logging_config:
+#   '*':
+#     log-level: "warn"
+#     logger-type: "file"
 
 ############################################################
 # /etc/rstudio/database.conf
