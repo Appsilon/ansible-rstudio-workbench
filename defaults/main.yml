@@ -25,6 +25,15 @@ rstudio_workbench_rsession_config:
   session-timeout-minutes: 30
 
 ############################################################
+# /etc/rstudio/logging.conf
+############################################################
+
+rstudio_workbench_logging_config:
+  '*':
+    log-level: "warn"
+    logger-type: "file"
+
+############################################################
 # /etc/rstudio/database.conf
 #
 # Required when:

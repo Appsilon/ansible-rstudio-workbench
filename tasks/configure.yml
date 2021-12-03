@@ -19,6 +19,16 @@
   tags:
     - rstudio-workbench-configure-session
 
+- name: configure | logging configuration file
+  template:
+    src: etc/rstudio/logging.conf.j2
+    dest: /etc/rstudio/logging.conf
+    owner: root
+    group: root
+    mode: 0644
+  tags:
+    - rstudio-workbench-configure-logging
+
 - name: configure | create (database) configuration file
   template:
     src: etc/rstudio/database.conf.j2
