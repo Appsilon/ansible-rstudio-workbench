@@ -26,6 +26,8 @@
     owner: root
     group: root
     mode: 0644
+  when:
+    - rstudio_workbench_logging_config is defined
   tags:
     - rstudio-workbench-configure-logging
 
