@@ -210,3 +210,11 @@ rstudio_workbench_rsession_config:
 #     access_provider: ldap
 #     auth_provider: ldap
 #     id_provider: ldap
+
+############################################################
+# /etc/rstudio/repos.conf
+############################################################
+
+# rstudio_workbench_repos_config:
+#   CRAN: "https://example.com/cran/__linux__/focal/latest"
+#   Internal: "https://example.com/internal-git/latest"

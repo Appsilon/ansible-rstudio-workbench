@@ -150,6 +150,18 @@
   tags:
     - rstudio-workbench-configure-env-vars
 
+- name: configure | create (repos.conf) file
+  template:
+    src: etc/rstudio/repos.conf.j2
+    dest: /etc/rstudio/repos.conf
+    owner: root
+    group: root
+    mode: 0644
+  when:
+    - rstudio_workbench_repos_config is defined
+  tags:
+    - rstudio-workbench-configure-repos
+
 - name: configure | activate server license
   shell: |
     /usr/sbin/rstudio-server license-manager activate {{ rstudio_workbench_license }}
