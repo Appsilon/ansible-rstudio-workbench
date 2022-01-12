@@ -43,7 +43,7 @@ jobs:
       matrix:
         include:
           - distro: ubuntu2004
-            ansible-version: '>=2.10, <2.11'
+            ansible-version: '>=2.11.5'
 
     steps:
       - name: Check out the codebase
