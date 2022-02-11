@@ -1,7 +1,7 @@
 # defaults file
 ---
 
-rstudio_workbench_version: "2021.09.1-372.pro1"
+rstudio_workbench_version: "2021.09.2-382.pro1"
 rstudio_workbench_install: []
 
 rstudio_workbench_www_port: 8787
