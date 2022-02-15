@@ -1,0 +1,21 @@
+---
+
+- name: install | pro-drivers (download)
+  get_url:
+    url: "https://cdn.rstudio.com/drivers/7C152C12/installer/rstudio-drivers_2021.10.0_amd64.deb"
+    dest: "{{ rstudio_workbench_downloads_path }}/rstudio-drivers_2021.10.0_amd64.deb"
+  when: rstudio_workbench_install_pro_drivers
+
+- name: install | pro-drivers
+  apt:
+    deb: "{{ rstudio_workbench_downloads_path }}/rstudio-drivers_2021.10.0_amd64.deb"
+  when: rstudio_workbench_install_pro_drivers
+
+- name: configure | pro-drivers
+  copy:
+    src: /opt/rstudio-drivers/odbcinst.ini.sample
+    dest: /etc/odbcinst.ini
+    remote_src: true
+  when: rstudio_workbench_install_pro_drivers
+
+...

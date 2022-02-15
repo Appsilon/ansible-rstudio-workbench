@@ -29,6 +29,8 @@
   tags:
     - r-version-install
 
+- include: install-drivers.yml
+
 - name: start and enable service
   service:
     name: rstudio-server
