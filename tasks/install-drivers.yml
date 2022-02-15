@@ -15,6 +15,9 @@
   copy:
     src: /opt/rstudio-drivers/odbcinst.ini.sample
     dest: /etc/odbcinst.ini
+    mode: 0644
+    owner: root
+    group: root
     remote_src: true
   when: rstudio_workbench_install_pro_drivers
 
