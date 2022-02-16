@@ -1,0 +1,28 @@
+---
+
+- name: install pro-drivers | install dependencies
+  apt:
+    name: "{{ rstudio_workbench_pro_drivers_dependencies }}"
+    state: "{{ apt_install_state | default('latest') }}"
+    update_cache: true
+    cache_valid_time: "{{ apt_update_cache_valid_time | default(3600) }}"
+
+- name: install pro-drivers | download deb
+  get_url:
+    url: "{{ rstudio_workbench_pro_drivers_download_url }}"
+    dest: "{{ rstudio_workbench_downloads_path }}/rstudio-drivers_{{ rstudio_workbench_pro_drivers_version }}_{{ rstudio_workbench_machine_map[ansible_machine] }}.deb"
+
+- name: install pro-drivers | install deb
+  apt:
+    deb: "{{ rstudio_workbench_downloads_path }}/rstudio-drivers_{{ rstudio_workbench_pro_drivers_version }}_{{ rstudio_workbench_machine_map[ansible_machine] }}.deb"
+
+- name: configure pro-drivers | create odbcinst.ini
+  copy:
+    src: /opt/rstudio-drivers/odbcinst.ini.sample
+    dest: /etc/odbcinst.ini
+    mode: 0644
+    owner: root
+    group: root
+    remote_src: true
+
+...

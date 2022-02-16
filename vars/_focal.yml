@@ -1,4 +1,7 @@
 # vars file
 ---
 rstudio_workbench_download_url: "https://download2.rstudio.org/server/bionic/{{ rstudio_workbench_machine_map[ansible_machine] }}/rstudio-workbench-{{ rstudio_workbench_version }}-{{ rstudio_workbench_machine_map[ansible_machine] }}.deb"
+
+rstudio_workbench_pro_drivers_download_url: "https://cdn.rstudio.com/drivers/7C152C12/installer/rstudio-drivers_{{ rstudio_workbench_pro_drivers_version }}_{{ rstudio_workbench_machine_map[ansible_machine] }}.deb"
+
 r_download_url: "https://cdn.rstudio.com/r/ubuntu-{{ ansible_lsb.release|replace('.','') }}/pkgs"
