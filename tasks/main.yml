@@ -30,7 +30,7 @@
     - r-version-install
 
 - include: install-drivers.yml
-  when: rstudio_workbench_install_pro_drivers
+  when: rstudio_workbench_pro_drivers_install
 
 - name: start and enable service
   service:
