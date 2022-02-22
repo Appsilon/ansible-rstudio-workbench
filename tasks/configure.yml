@@ -1,4 +1,5 @@
 ---
+
 - name: configure | update (server) configuration file
   template:
     src: etc/rstudio/rserver.conf.j2
@@ -8,6 +9,17 @@
     mode: 0644
   tags:
     - rstudio-workbench-configure-server
+
+- name: configure | create (SSO metadata xml) file
+  copy:
+    content: "{{ rstudio_workbench_sso_saml_metadata_content_b64_encoded | b64decode }}"
+    dest: "{{ rstudio_workbench_sso_saml_metadata_file_path }}"
+    owner: root
+    group: root
+    mode: 0600
+  when:
+    - rstudio_workbench_sso_saml_metadata_content_b64_encoded|d()
+    - rstudio_workbench_sso_saml_metadata_file_path|d()
 
 - name: configure | update (session) configuration file
   template:

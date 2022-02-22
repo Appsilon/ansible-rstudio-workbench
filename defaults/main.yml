@@ -4,14 +4,15 @@
 rstudio_workbench_version: "2021.09.2-382.pro1"
 rstudio_workbench_install: []
 
-rstudio_workbench_pro_drivers_install: true
-rstudio_workbench_pro_drivers_version: "2021.10.0"
-rstudio_workbench_pro_drivers_dependencies: ["unixodbc", "unixodbc-dev"]
-
 rstudio_workbench_www_port: 8787
 rstudio_workbench_health_check_enabled: 0
 
-rstudio_workbench_sssd_install: false
+############################################################
+# Authentication - SAML
+############################################################
+
+# rstudio_workbench_sso_saml_metadata_file_path: "/etc/rstudio/saml-metadata.xml"
+# rstudio_workbench_sso_saml_metadata_content_b64_encoded: ""
 
 ############################################################
 # /etc/rstudio/rserver.conf
@@ -20,6 +21,13 @@ rstudio_workbench_sssd_install: false
 rstudio_workbench_rserver_config:
   www-port: "{{ rstudio_workbench_www_port }}"
   server-health-check-enabled: "{{ rstudio_workbench_health_check_enabled }}"
+
+  ##########################################################
+  # /etc/rstudio/rserver.conf - Authentication with SAML
+  ##########################################################
+
+  # auth-saml: 1
+  # auth-saml-metadata-path: "{{ rstudio_workbench_sso_saml_metadata_file_path }}"
 
 ############################################################
 # /etc/rstudio/rsession.conf
@@ -38,6 +46,7 @@ rstudio_workbench_rsession_config:
 #     logger-type: "file"
 
 ############################################################
+#
 # /etc/rstudio/database.conf
 #
 # Required when:
@@ -205,6 +214,8 @@ rstudio_workbench_rsession_config:
 # /etc/sssd/sssd.conf
 ############################################################
 
+rstudio_workbench_sssd_install: false
+
 # rstudio_workbench_sssd_config:
 #   'sssd':
 #     domains: example.com
@@ -222,3 +233,11 @@ rstudio_workbench_rsession_config:
 # rstudio_workbench_repos_config:
 #   CRAN: "https://example.com/cran/__linux__/focal/latest"
 #   Internal: "https://example.com/internal-git/latest"
+
+############################################################
+# RStudio Pro Drivers
+############################################################
+
+rstudio_workbench_pro_drivers_install: true
+rstudio_workbench_pro_drivers_version: "2021.10.0"
+rstudio_workbench_pro_drivers_dependencies: ["unixodbc", "unixodbc-dev"]
