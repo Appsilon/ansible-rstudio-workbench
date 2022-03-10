@@ -14,7 +14,7 @@
   copy:
     content: "{{ rstudio_workbench_sso_saml_metadata_content_b64_encoded | b64decode }}"
     dest: "{{ rstudio_workbench_sso_saml_metadata_file_path }}"
-    owner: root
+    owner: rstudio-server
     group: root
     mode: 0600
   when:
