@@ -1,7 +1,7 @@
 ---
 
 - name: configure | create (load-balancer) configuration file
-  template:
+  ansible.builtin.template:
     src: etc/rstudio/load-balancer.j2
     dest: /etc/rstudio/load-balancer
     owner: root
@@ -12,7 +12,7 @@
     - rstudio_workbench_load_balancer_config|length
 
 - name: configure | create (secure-cookie-key) file
-  copy:
+  ansible.builtin.copy:
     content: "{{ rstudio_workbench_secure_cookie_key }}"
     dest: /etc/rstudio/secure-cookie-key
     owner: root

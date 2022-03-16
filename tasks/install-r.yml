@@ -1,18 +1,17 @@
 ---
 
 - name: install | r-version (download)
-  get_url:
+  ansible.builtin.get_url:
     url: "{{ r_download_url }}/r-{{ item }}_1_{{ rstudio_workbench_machine_map[ansible_machine] }}.deb"
     dest: "{{ rstudio_workbench_downloads_path }}/r-{{ item }}_1_amd64.deb"
+    mode: 0644
+    owner: root
+    group: root
   loop: "{{ r_versions }}"
-  tags:
-    - r-version-install
   when: r_versions is defined
 
 - name: install | r-version
-  apt:
+  ansible.builtin.apt:
     deb: "{{ rstudio_workbench_downloads_path }}/r-{{ item }}_1_amd64.deb"
   loop: "{{ r_versions }}"
-  tags:
-    - r-version-install
   when: r_versions is defined

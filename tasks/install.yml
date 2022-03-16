@@ -1,23 +1,19 @@
 # tasks file
 ---
 - name: install | dependencies
-  apt:
+  ansible.builtin.apt:
     name: "{{ rstudio_workbench_dependencies }}"
     state: "{{ apt_install_state | default('latest') }}"
     update_cache: true
     cache_valid_time: "{{ apt_update_cache_valid_time | default(3600) }}"
-  tags:
-    - rstudio-workbench-install-dependencies
 
 - name: install | additional
-  apt:
+  ansible.builtin.apt:
     name: "{{ rstudio_workbench_install }}"
     state: "{{ apt_install_state | default('latest') }}"
-  tags:
-    - rstudio-workbench-install-additional
 
 - name: install | sssd
-  apt:
+  ansible.builtin.apt:
     name: "{{ item }}"
     state: "{{ apt_install_state | default('latest') }}"
     cache_valid_time: "{{ apt_update_cache_valid_time | default(3600) }}"
@@ -31,35 +27,24 @@
   when:
     - rstudio_workbench_sssd_config is defined or
       rstudio_workbench_sssd_install is sameas true
-  tags:
-    - rstudio-workbench-configure-sssd
 
 - name: install | create (download) directory
-  file:
+  ansible.builtin.file:
     path: "{{ rstudio_workbench_downloads_path }}"
     state: directory
     owner: root
     group: root
     mode: 0755
-  tags:
-    - rstudio-workbench-install-download
-    - rstudio-workbench-install-download-directory
 
 - name: install | download deb
-  command: >
+  ansible.builtin.command: >
     curl --silent --show-error --fail --location
     {{ rstudio_workbench_download_url }}
     -o {{ rstudio_workbench_downloads_path }}/rstudio-workbench-{{ rstudio_workbench_version }}-{{ rstudio_workbench_machine_map[ansible_machine] }}.deb
   args:
     creates: "{{ rstudio_workbench_downloads_path }}/rstudio-workbench-{{ rstudio_workbench_version }}-{{ rstudio_workbench_machine_map[ansible_machine] }}.deb"
     warn: false
-  tags:
-    - rstudio-workbench-install-download
-    - rstudio-workbench-install-download-deb
 
 - name: install | install deb
-  apt:
+  ansible.builtin.apt:
     deb: "{{ rstudio_workbench_downloads_path }}/rstudio-workbench-{{ rstudio_workbench_version }}-{{ rstudio_workbench_machine_map[ansible_machine] }}.deb"
-  tags:
-    - rstudio-workbench-install-install
-    - rstudio-workbench-install-install-deb

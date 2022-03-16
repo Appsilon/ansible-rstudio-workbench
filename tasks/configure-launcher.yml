@@ -1,7 +1,7 @@
 ---
 
 - name: configure | update (launcher-env) configuration file
-  template:
+  ansible.builtin.template:
     src: etc/rstudio/launcher-env.j2
     dest: /etc/rstudio/launcher-env
     owner: root
@@ -9,7 +9,7 @@
     mode: 0644
 
 - name: configure | update (launcher-mounts) configuration file
-  template:
+  ansible.builtin.template:
     src: etc/rstudio/launcher-mounts.j2
     dest: /etc/rstudio/launcher-mounts
     owner: root
@@ -17,7 +17,7 @@
     mode: 0644
 
 - name: configure | update (launcher-ports) configuration file
-  template:
+  ansible.builtin.template:
     src: etc/rstudio/launcher-ports.j2
     dest: /etc/rstudio/launcher-ports
     owner: root
@@ -25,7 +25,7 @@
     mode: 0644
 
 - name: configure | update (launcher) configuration file
-  template:
+  ansible.builtin.template:
     src: etc/rstudio/launcher.conf.j2
     dest: /etc/rstudio/launcher.conf
     owner: root
@@ -33,7 +33,7 @@
     mode: 0644
 
 - name: configure | update (launcher kubernetes) configuration file
-  template:
+  ansible.builtin.template:
     src: etc/rstudio/launcher.kubernetes.conf.j2
     dest: /etc/rstudio/launcher.kubernetes.conf
     owner: root
@@ -41,7 +41,7 @@
     mode: 0644
 
 - name: configure | update (launcher kubernetes profiles) configuration file
-  template:
+  ansible.builtin.template:
     src: etc/rstudio/launcher.kubernetes.profiles.conf.j2
     dest: /etc/rstudio/launcher.kubernetes.profiles.conf
     owner: root
@@ -49,7 +49,7 @@
     mode: 0644
 
 - name: configure | create (RSA launcher private key) file
-  copy:
+  ansible.builtin.copy:
     content: "{{ rstudio_workbench_launcher_pem_b64_encoded | b64decode }}"
     dest: /etc/rstudio/launcher.pem
     owner: root
@@ -59,7 +59,7 @@
     - rstudio_workbench_launcher_pem_b64_encoded is defined
 
 - name: configure | create (RSA launcher public key) file
-  copy:
+  ansible.builtin.copy:
     content: "{{ rstudio_workbench_launcher_pub_b64_encoded | b64decode }}"
     dest: /etc/rstudio/launcher.pub
     owner: root
