@@ -148,10 +148,27 @@
   when:
     - rstudio_workbench_repos_config is defined
 
-- name: configure | activate server license
+- name: configure | license activation (offline)
+  block:
+    - name: license activation (offline) | upload key file
+      ansible.builtin.copy:
+        content: "{{ rstudio_workbench_license_offline_key_b64_encoded | b64decode }}"
+        dest: "/etc/rstudio/activation-key.lic"
+        owner: root
+        group: root
+        mode: 0600
+
+    - name: license activation (offline) | activate using key file  # noqa no-changed-when
+      ansible.builtin.shell: |
+        /usr/sbin/rstudio-server license-manager activate-file /etc/rstudio/activation-key.lic
+  notify: restart rstudio-workbench
+  when: rstudio_workbench_license_offline_key_b64_encoded|d()
+  no_log: true
+
+- name: configure | license activation (online)
   ansible.builtin.shell: |
     /usr/sbin/rstudio-server license-manager activate {{ rstudio_workbench_license }}
   notify: restart rstudio-workbench
+  register: license_output
   when: rstudio_workbench_license|d()
   no_log: true
-  register: license_output
