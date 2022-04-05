@@ -4,6 +4,7 @@ name: Release
   push:
     tags:
       - '*'
+  workflow_dispatch:
 
 jobs:
 
