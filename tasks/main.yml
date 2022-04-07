@@ -13,8 +13,6 @@
 - include: configure.yml
   notify: restart rstudio-workbench
 
-- include: install-r.yml
-
 - include: install-drivers.yml
   when: rstudio_workbench_pro_drivers_install
 
