@@ -233,11 +233,3 @@ rstudio_workbench_sssd_install: false
 # rstudio_workbench_repos_config:
 #   CRAN: "https://example.com/cran/__linux__/focal/latest"
 #   Internal: "https://example.com/internal-git/latest"
-
-############################################################
-# RStudio Pro Drivers
-############################################################
-
-rstudio_workbench_pro_drivers_install: true
-rstudio_workbench_pro_drivers_version: "2021.10.0"
-rstudio_workbench_pro_drivers_dependencies: ["unixodbc", "unixodbc-dev"]

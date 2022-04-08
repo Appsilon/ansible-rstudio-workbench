@@ -16,9 +16,6 @@
   notify: restart rstudio-workbench
   tags: configure
 
-- include: install-drivers.yml
-  when: rstudio_workbench_pro_drivers_install
-
 - name: start and enable service
   ansible.builtin.service:
     name: rstudio-server
