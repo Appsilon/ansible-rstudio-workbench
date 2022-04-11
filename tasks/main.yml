@@ -6,12 +6,15 @@
     - "_{{ ansible_distribution_release }}.yml"
     - "_{{ ansible_distribution | lower }}.yml"
     - _default.yml
+  tags: always
 
 - include: install.yml
   notify: restart rstudio-workbench
+  tags: install
 
 - include: configure.yml
   notify: restart rstudio-workbench
+  tags: configure
 
 - include: install-drivers.yml
   when: rstudio_workbench_pro_drivers_install
