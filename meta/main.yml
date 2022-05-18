@@ -1,9 +1,8 @@
 # meta file
 ---
 galaxy_info:
-  namespace: appsilon
   role_name: rstudio_workbench
-  author: DamianBudelewski
+  author: damianbudelewski
   company: Appsilon
   description: Set up (the latest version of) RStudio Workbench in Debian-like systems
   license: MIT
