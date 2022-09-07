@@ -75,7 +75,7 @@
     group: root
     mode: 0600
   notify:
-    - restart sssd
+    - Restart sssd
   when:
     - rstudio_workbench_sssd_config is defined
 
@@ -104,7 +104,7 @@
 
 - include: configure-launcher.yml
   notify:
-    - restart rstudio-job-launcher
+    - Restart rstudio-job-launcher
 
 - name: Configure | create (openid) configuration file
   ansible.builtin.template:
@@ -161,14 +161,14 @@
     - name: License activation (offline) | activate using key file  # noqa no-changed-when
       ansible.builtin.shell: |
         /usr/sbin/rstudio-server license-manager activate-file /etc/rstudio/activation-key.lic
-  notify: restart rstudio-workbench
+  notify: Restart rstudio-workbench
   when: rstudio_workbench_license_offline_key_b64_encoded | d()
   no_log: true
 
 - name: Configure | license activation (online)
   ansible.builtin.shell: |
     /usr/sbin/rstudio-server license-manager activate {{ rstudio_workbench_license }}
-  notify: restart rstudio-workbench
+  notify: Restart rstudio-workbench
   register: license_output
   when: rstudio_workbench_license | d()
   no_log: true

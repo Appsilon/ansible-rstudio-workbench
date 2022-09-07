@@ -9,11 +9,11 @@
   tags: always
 
 - include: install.yml
-  notify: restart rstudio-workbench
+  notify: Restart rstudio-workbench
   tags: install
 
 - include: configure.yml
-  notify: restart rstudio-workbench
+  notify: Restart rstudio-workbench
   tags: configure
 
 - name: Start and enable service
