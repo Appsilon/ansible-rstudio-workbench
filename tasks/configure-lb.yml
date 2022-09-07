@@ -1,6 +1,6 @@
 ---
 
-- name: configure | create (load-balancer) configuration file
+- name: Configure | create (load-balancer) configuration file
   ansible.builtin.template:
     src: etc/rstudio/load-balancer.j2
     dest: /etc/rstudio/load-balancer
@@ -11,7 +11,7 @@
     - rstudio_workbench_load_balancer_config is defined
     - rstudio_workbench_load_balancer_config|length
 
-- name: configure | create (secure-cookie-key) file
+- name: Configure | create (secure-cookie-key) file
   ansible.builtin.copy:
     content: "{{ rstudio_workbench_secure_cookie_key }}"
     dest: /etc/rstudio/secure-cookie-key

@@ -1,18 +1,18 @@
 # tasks file
 ---
-- name: install | dependencies
+- name: Install | dependencies
   ansible.builtin.apt:
     name: "{{ rstudio_workbench_dependencies }}"
     state: "{{ apt_install_state | default('latest') }}"
     update_cache: true
     cache_valid_time: "{{ apt_update_cache_valid_time | default(3600) }}"
 
-- name: install | additional
+- name: Install | additional
   ansible.builtin.apt:
     name: "{{ rstudio_workbench_install }}"
     state: "{{ apt_install_state | default('latest') }}"
 
-- name: install | sssd
+- name: Install | sssd
   ansible.builtin.apt:
     name: "{{ item }}"
     state: "{{ apt_install_state | default('latest') }}"
@@ -28,7 +28,7 @@
     - rstudio_workbench_sssd_config is defined or
       rstudio_workbench_sssd_install is sameas true
 
-- name: install | create (download) directory
+- name: Install | create (download) directory
   ansible.builtin.file:
     path: "{{ rstudio_workbench_downloads_path }}"
     state: directory
@@ -36,7 +36,7 @@
     group: root
     mode: 0755
 
-- name: install | download deb
+- name: Install | download deb
   ansible.builtin.command: >
     curl --silent --show-error --fail --location
     {{ rstudio_workbench_download_url }}
@@ -45,6 +45,6 @@
     creates: "{{ rstudio_workbench_downloads_path }}/rstudio-workbench-{{ rstudio_workbench_version }}-{{ rstudio_workbench_machine_map[ansible_machine] }}.deb"
     warn: false
 
-- name: install | install deb
+- name: Install | install deb
   ansible.builtin.apt:
     deb: "{{ rstudio_workbench_downloads_path }}/rstudio-workbench-{{ rstudio_workbench_version }}-{{ rstudio_workbench_machine_map[ansible_machine] }}.deb"

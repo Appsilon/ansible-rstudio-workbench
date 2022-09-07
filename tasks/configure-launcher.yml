@@ -1,6 +1,6 @@
 ---
 
-- name: configure | update (launcher-env) configuration file
+- name: Configure | update (launcher-env) configuration file
   ansible.builtin.template:
     src: etc/rstudio/launcher-env.j2
     dest: /etc/rstudio/launcher-env
@@ -8,7 +8,7 @@
     group: root
     mode: 0644
 
-- name: configure | update (launcher-mounts) configuration file
+- name: Configure | update (launcher-mounts) configuration file
   ansible.builtin.template:
     src: etc/rstudio/launcher-mounts.j2
     dest: /etc/rstudio/launcher-mounts
@@ -16,7 +16,7 @@
     group: root
     mode: 0644
 
-- name: configure | update (launcher-ports) configuration file
+- name: Configure | update (launcher-ports) configuration file
   ansible.builtin.template:
     src: etc/rstudio/launcher-ports.j2
     dest: /etc/rstudio/launcher-ports
@@ -24,7 +24,7 @@
     group: root
     mode: 0644
 
-- name: configure | update (launcher) configuration file
+- name: Configure | update (launcher) configuration file
   ansible.builtin.template:
     src: etc/rstudio/launcher.conf.j2
     dest: /etc/rstudio/launcher.conf
@@ -32,7 +32,7 @@
     group: root
     mode: 0644
 
-- name: configure | update (launcher kubernetes) configuration file
+- name: Configure | update (launcher kubernetes) configuration file
   ansible.builtin.template:
     src: etc/rstudio/launcher.kubernetes.conf.j2
     dest: /etc/rstudio/launcher.kubernetes.conf
@@ -40,7 +40,7 @@
     group: root
     mode: 0644
 
-- name: configure | update (launcher kubernetes profiles) configuration file
+- name: Configure | update (launcher kubernetes profiles) configuration file
   ansible.builtin.template:
     src: etc/rstudio/launcher.kubernetes.profiles.conf.j2
     dest: /etc/rstudio/launcher.kubernetes.profiles.conf
@@ -48,7 +48,7 @@
     group: root
     mode: 0644
 
-- name: configure | create (RSA launcher private key) file
+- name: Configure | create (RSA launcher private key) file
   ansible.builtin.copy:
     content: "{{ rstudio_workbench_launcher_pem_b64_encoded | b64decode }}"
     dest: /etc/rstudio/launcher.pem
@@ -58,7 +58,7 @@
   when:
     - rstudio_workbench_launcher_pem_b64_encoded is defined
 
-- name: configure | create (RSA launcher public key) file
+- name: Configure | create (RSA launcher public key) file
   ansible.builtin.copy:
     content: "{{ rstudio_workbench_launcher_pub_b64_encoded | b64decode }}"
     dest: /etc/rstudio/launcher.pub

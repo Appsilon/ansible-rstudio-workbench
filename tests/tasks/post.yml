@@ -1,12 +1,12 @@
 # post test file
 ---
-- name: install test dependencies
+- name: Install test dependencies
   ansible.builtin.apt:
     name:
       - wget
     state: "{{ apt_install_state | default('latest') }}"
 
-- name: test rstudio-workbench installation
+- name: Test rstudio-workbench installation
   ansible.builtin.shell: >
     wget http://localhost:8787/auth-sign-in -O /dev/null -S --quiet 2>&1
     | grep -q '200 OK'
