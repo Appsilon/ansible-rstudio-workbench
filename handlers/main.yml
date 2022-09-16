@@ -1,18 +1,18 @@
 # handlers file
 ---
-- name: restart rstudio-workbench
+- name: Restart rstudio-workbench
   ansible.builtin.service:
     name: rstudio-server
     state: restarted
   when: service_default_state | default('started') == 'started'
 
-- name: restart rstudio-job-launcher
+- name: Restart rstudio-job-launcher
   ansible.builtin.service:
     name: rstudio-launcher
     state: restarted
   when: service_default_state | default('started') == 'started'
 
-- name: restart sssd
+- name: Restart sssd
   ansible.builtin.service:
     name: sssd
     state: restarted
