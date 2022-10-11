@@ -8,11 +8,13 @@
     - _default.yml
   tags: always
 
-- include: install.yml
+- name: Import install tasks
+  ansible.builtin.import_tasks: install.yml
   notify: Restart rstudio-workbench
   tags: install
 
-- include: configure.yml
+- name: Import configure tasks
+  ansible.builtin.import_tasks: configure.yml
   notify: Restart rstudio-workbench
   tags: configure
 

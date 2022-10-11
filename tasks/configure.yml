@@ -79,7 +79,8 @@
   when:
     - rstudio_workbench_sssd_config is defined
 
-- include: configure-lb.yml
+- name: Configure | import load balancer tasks
+  ansible.builtin.import_tasks: configure-lb.yml
   when:
     - rstudio_workbench_load_balancer_config is defined
     - rstudio_workbench_database_config is defined
@@ -102,7 +103,8 @@
   when:
     - rstudio_workbench_users_home_dir is defined
 
-- include: configure-launcher.yml
+- name: Configure | import launcher tasks
+  ansible.builtin.import_tasks: configure-launcher.yml
   notify:
     - Restart rstudio-job-launcher
 
@@ -149,6 +151,9 @@
     - rstudio_workbench_repos_config is defined
 
 - name: Configure | license activation (offline)
+  notify: Restart rstudio-workbench
+  when: rstudio_workbench_license_offline_key_b64_encoded | d()
+  no_log: true
   block:
     - name: License activation (offline) | upload key file
       ansible.builtin.copy:
@@ -161,9 +166,6 @@
     - name: License activation (offline) | activate using key file  # noqa no-changed-when
       ansible.builtin.shell: |
         /usr/sbin/rstudio-server license-manager activate-file /etc/rstudio/activation-key.lic
-  notify: Restart rstudio-workbench
-  when: rstudio_workbench_license_offline_key_b64_encoded | d()
-  no_log: true
 
 - name: Configure | license activation (online)
   ansible.builtin.shell: |
