@@ -1,0 +1,12 @@
+# tasks file
+---
+- name: Install | download rpm
+  ansible.builtin.get_url:
+    url: "{{ rstudio_workbench_download_url }}"
+    dest: "{{ rstudio_workbench_downloads_path }}/rstudio-workbench-{{ rstudio_workbench_version }}.rpm"
+    mode: '0755'
+
+- name: Install | install rpm
+  ansible.builtin.yum:
+    name: "{{ rstudio_workbench_downloads_path }}/rstudio-workbench-{{ rstudio_workbench_version }}.rpm"
+    disable_gpg_check: true
