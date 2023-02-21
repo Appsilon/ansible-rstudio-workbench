@@ -44,6 +44,8 @@ jobs:
         include:
           - distro: ubuntu2004
             ansible-version: '>=2.11.5'
+          - distro: rockylinux8
+            ansible-version: '>=2.11.5'
 
     steps:
       - name: Check out the codebase
