@@ -11,6 +11,9 @@ galaxy_info:
     - name: Ubuntu
       versions:
         - focal
+    - name: EL
+      versions:
+        - "8"
   galaxy_tags:
     - development
     - system

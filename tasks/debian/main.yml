@@ -1,0 +1,11 @@
+# tasks file
+---
+- name: Install | download deb
+  ansible.builtin.get_url:
+    url: "{{ rstudio_workbench_download_url }}"
+    dest: "{{ rstudio_workbench_downloads_path }}/rstudio-workbench-{{ rstudio_workbench_version }}-{{ rstudio_workbench_machine_map[ansible_machine] }}.deb"
+    mode: '0755'
+
+- name: Install | install deb
+  ansible.builtin.apt:
+    deb: "{{ rstudio_workbench_downloads_path }}/rstudio-workbench-{{ rstudio_workbench_version }}-{{ rstudio_workbench_machine_map[ansible_machine] }}.deb"

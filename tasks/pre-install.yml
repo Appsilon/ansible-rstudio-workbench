@@ -1,0 +1,34 @@
+# tasks file
+---
+- name: Install | update apt cache
+  ansible.builtin.apt:
+    update_cache: true
+    cache_valid_time: "{{ apt_update_cache_valid_time | default(3600) }}"
+  when: ansible_os_family == 'Debian'
+
+- name: Install | dependencies
+  ansible.builtin.package:
+    name: "{{ rstudio_workbench_dependencies }}"
+    state: "{{ package_install_state | default('latest') }}"
+
+- name: Install | additional
+  ansible.builtin.package:
+    name: "{{ rstudio_workbench_install }}"
+    state: "{{ package_install_state | default('latest') }}"
+
+- name: Install | sssd
+  ansible.builtin.package:
+    name: "{{ item }}"
+    state: "{{ package_install_state | default('latest') }}"
+  loop: "{{ rstudio_sssd_dependencies }}"
+  when:
+    - rstudio_workbench_sssd_config is defined or
+      rstudio_workbench_sssd_install is sameas true
+
+- name: Install | create (download) directory
+  ansible.builtin.file:
+    path: "{{ rstudio_workbench_downloads_path }}"
+    state: directory
+    owner: root
+    group: root
+    mode: 0755

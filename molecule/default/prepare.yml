@@ -1,5 +1,14 @@
 ---
 - name: Prepare
   hosts: all
-  become: true
-  tasks: []
+  tasks:
+    - name: Install R from package
+      ansible.builtin.apt:
+        name: r-base
+        update_cache: true
+      when: ansible_os_family == 'Debian'
+
+    - name: Install R from package
+      ansible.builtin.yum:
+        name: R
+      when: ansible_os_family == 'RedHat'

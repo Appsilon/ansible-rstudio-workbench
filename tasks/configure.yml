@@ -7,6 +7,7 @@
     owner: root
     group: root
     mode: 0644
+  notify: Restart rstudio-workbench
 
 - name: Configure | create (SSO metadata xml) file
   ansible.builtin.copy:
@@ -15,6 +16,7 @@
     owner: rstudio-server
     group: root
     mode: 0600
+  notify: Restart rstudio-workbench
   when:
     - rstudio_workbench_sso_saml_metadata_content_b64_encoded|d()
     - rstudio_workbench_sso_saml_metadata_file_path|d()
@@ -26,6 +28,7 @@
     owner: root
     group: root
     mode: 0644
+  notify: Restart rstudio-workbench
 
 - name: Configure | logging configuration file
   ansible.builtin.template:
@@ -36,6 +39,7 @@
     mode: 0644
   when:
     - rstudio_workbench_logging_config is defined
+  notify: Restart rstudio-workbench
 
 - name: Configure | create (database) configuration file
   ansible.builtin.template:
@@ -46,6 +50,7 @@
     mode: 0600
   when:
     - rstudio_workbench_database_config is defined
+  notify: Restart rstudio-workbench
 
 - name: Configure | update (profiles) configuration file
   ansible.builtin.template:
@@ -66,6 +71,7 @@
     mode: 0644
   when:
     - rstudio_workbench_pam_profile is defined
+  notify: Restart rstudio-workbench
 
 - name: Configure | create sssd service config
   ansible.builtin.template:
@@ -79,7 +85,8 @@
   when:
     - rstudio_workbench_sssd_config is defined
 
-- include: configure-lb.yml
+- name: Include configure-lb
+  ansible.builtin.include_tasks: configure-lb.yml
   when:
     - rstudio_workbench_load_balancer_config is defined
     - rstudio_workbench_database_config is defined
@@ -102,7 +109,8 @@
   when:
     - rstudio_workbench_users_home_dir is defined
 
-- include: configure-launcher.yml
+- name: Include configure-launcher
+  ansible.builtin.import_tasks: configure-launcher.yml
   notify:
     - Restart rstudio-job-launcher
 
@@ -149,6 +157,9 @@
     - rstudio_workbench_repos_config is defined
 
 - name: Configure | license activation (offline)
+  notify: Restart rstudio-workbench
+  when: rstudio_workbench_license_offline_key_b64_encoded | d()
+  no_log: true
   block:
     - name: License activation (offline) | upload key file
       ansible.builtin.copy:
@@ -161,9 +172,6 @@
     - name: License activation (offline) | activate using key file  # noqa no-changed-when
       ansible.builtin.shell: |
         /usr/sbin/rstudio-server license-manager activate-file /etc/rstudio/activation-key.lic
-  notify: Restart rstudio-workbench
-  when: rstudio_workbench_license_offline_key_b64_encoded | d()
-  no_log: true
 
 - name: Configure | license activation (online)
   ansible.builtin.shell: |

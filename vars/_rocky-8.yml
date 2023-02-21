@@ -1,0 +1,15 @@
+# vars file
+---
+rstudio_sssd_dependencies:
+  - realmd
+  - oddjob
+  - oddjob-mkhomedir
+  - sssd
+  - adcli
+  - samba-common
+  - samba-common-tools
+  - krb5-workstation
+  - openldap-clients
+  - policycoreutils-python
+
+rstudio_workbench_download_url: "https://download2.rstudio.org/server/rhel8/x86_64/rstudio-workbench-rhel-{{ rstudio_workbench_version }}-x86_64.rpm"

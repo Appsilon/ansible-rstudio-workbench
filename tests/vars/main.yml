@@ -1,4 +1,3 @@
 # vars file
 ---
-rstudio_workbench_install:
-  - r-base
+rstudio_workbench_install: []
