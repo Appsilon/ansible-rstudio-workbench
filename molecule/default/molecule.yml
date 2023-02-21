@@ -8,10 +8,11 @@ platforms:
     image: "geerlingguy/docker-${MOLECULE_DISTRO:-ubuntu2004}-ansible:latest"
     command: ${MOLECULE_DOCKER_COMMAND:-""}
     volumes:
-      - /sys/fs/cgroup:/sys/fs/cgroup:ro
+      - /sys/fs/cgroup:/sys/fs/cgroup:rw
+    privileged: true
+    cgroupns_mode: host
     published_ports:
       - "0.0.0.0:8787:8787/tcp"
-    privileged: true
     pre_build_image: true
 provisioner:
   name: ansible
