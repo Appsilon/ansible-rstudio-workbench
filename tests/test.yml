@@ -1,13 +1,14 @@
 # test file
 ---
-- hosts: localhost
+- name: Test
+  hosts: localhost
   connection: local
   become: true
   pre_tasks:
-    - name: include vars
-      include_vars: "{{ playbook_dir }}/vars/main.yml"
+    - name: Include vars
+      ansible.builtin.include_vars: "{{ playbook_dir }}/vars/main.yml"
   roles:
     - ../../
   post_tasks:
-    - name: include tasks
-      include: "{{ playbook_dir }}/tasks/post.yml"
+    - name: Include tasks
+      ansible.builtin.include_tasks: "{{ playbook_dir }}/tasks/post.yml"

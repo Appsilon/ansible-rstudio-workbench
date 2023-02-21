@@ -173,7 +173,7 @@
       ansible.builtin.shell: |
         /usr/sbin/rstudio-server license-manager activate-file /etc/rstudio/activation-key.lic
 
-- name: Configure | license activation (online)
+- name: Configure | license activation (online)  # noqa no-changed-when
   ansible.builtin.shell: |
     /usr/sbin/rstudio-server license-manager activate {{ rstudio_workbench_license }}
   notify: Restart rstudio-workbench
