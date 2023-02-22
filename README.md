@@ -12,7 +12,7 @@ Set up (the latest version of) [RStudio Workbench](https://www.rstudio.com/produ
 
 ## Role Variables
 
-* `rstudio_workbench_version` [default: `2021.09.0-351.pro6`]: Version to install.
+* `rstudio_workbench_version` [default: `2022.12.0-353.pro20`]: Version to install.
 * `rstudio_workbench_install` [default: `[]`]: Additional packages to install (e.g. `r-base`).
 * `rstudio_workbench_www_port` [default: `8787`]: The port you want RStudio Workbench to listen on>
 * `rstudio_workbench_health_check_enabled` [default: 0]: Decision if you want to activate `http://<server-address-and-port>/health-check` endpoint.
