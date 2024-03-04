@@ -1,0 +1,12 @@
+# vars file
+---
+rstudio_sssd_dependencies:
+  - sssd-ad
+  - sssd-tools
+  - sssd-dbus
+  - realmd
+  - adcli
+
+rstudio_workbench_download_url: "https://download2.rstudio.org/server/jammy/{{ rstudio_workbench_machine_map[ansible_machine] }}/rstudio-workbench-{{ rstudio_workbench_version }}-{{ rstudio_workbench_machine_map[ansible_machine] }}.deb"
+
+r_download_url: "https://cdn.rstudio.com/r/ubuntu-{{ ansible_lsb.release | replace('.', '') }}/pkgs"
