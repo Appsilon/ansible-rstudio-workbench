@@ -156,6 +156,26 @@
   when:
     - rstudio_workbench_repos_config is defined
 
+- name: Configure | create (vscode.conf) file
+  ansible.builtin.template:
+    src: etc/rstudio/vscode.conf.j2
+    dest: /etc/rstudio/vscode.conf
+    owner: root
+    group: root
+    mode: 0644
+  when:
+    - rstudio_workbench_vscode_config is defined
+
+- name: Configure | create (jupyter.conf) file
+  ansible.builtin.template:
+    src: etc/rstudio/jupyter.conf.j2
+    dest: /etc/rstudio/jupyter.conf
+    owner: root
+    group: root
+    mode: 0644
+  when:
+    - rstudio_workbench_jupyter_config is defined
+
 - name: Configure | license activation (offline)
   notify: Restart rstudio-workbench
   when: rstudio_workbench_license_offline_key_b64_encoded | d()
