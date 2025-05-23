@@ -9,6 +9,6 @@
       when: ansible_os_family == 'Debian'
 
     - name: Install R from package
-      ansible.builtin.yum:
+      ansible.builtin.dnf:
         name: R
       when: ansible_os_family == 'RedHat'
