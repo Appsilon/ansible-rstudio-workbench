@@ -46,7 +46,7 @@ jobs:
             ansible-version: '>=2.11.5'
           - distro: ubuntu2204
             ansible-version: '>=2.11.5'
-          - distro: rockylinux8
+          - distro: ubuntu2404
             ansible-version: '>=2.11.5'
 
     steps:
