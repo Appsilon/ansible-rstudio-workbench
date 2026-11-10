@@ -18,8 +18,8 @@
     mode: 0600
   notify: Restart rstudio-workbench
   when:
-    - rstudio_workbench_sso_saml_metadata_content_b64_encoded|d()
-    - rstudio_workbench_sso_saml_metadata_file_path|d()
+    - rstudio_workbench_sso_saml_metadata_content_b64_encoded|length > 0
+    - rstudio_workbench_sso_saml_metadata_file_path|length > 0
 
 - name: Configure | update (session) configuration file
   ansible.builtin.template:
@@ -178,7 +178,7 @@
 
 - name: Configure | license activation (offline)
   notify: Restart rstudio-workbench
-  when: rstudio_workbench_license_offline_key_b64_encoded | d()
+  when: rstudio_workbench_license_offline_key_b64_encoded | d() | length > 0
   no_log: true
   block:
     - name: License activation (offline) | upload key file
@@ -198,5 +198,5 @@
     /usr/sbin/rstudio-server license-manager activate {{ rstudio_workbench_license }}
   notify: Restart rstudio-workbench
   register: license_output
-  when: rstudio_workbench_license | d()
+  when: rstudio_workbench_license | d() | length > 0
   no_log: true
