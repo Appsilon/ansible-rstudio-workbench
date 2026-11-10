@@ -44,7 +44,7 @@ jobs:
       matrix:
         include:
           - distro: ubuntu2004
-            ansible-version: '>=2.11.5'
+            ansible-version: '>=2.11.5,<2.17'
           - distro: ubuntu2204
             ansible-version: '>=2.11.5'
           - distro: ubuntu2404
