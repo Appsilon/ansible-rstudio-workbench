@@ -18,8 +18,8 @@
     mode: 0600
   notify: Restart rstudio-workbench
   when:
-    - rstudio_workbench_sso_saml_metadata_content_b64_encoded|length > 0
-    - rstudio_workbench_sso_saml_metadata_file_path|length > 0
+    - rstudio_workbench_sso_saml_metadata_content_b64_encoded|d()|length > 0
+    - rstudio_workbench_sso_saml_metadata_file_path|d()|length > 0
 
 - name: Configure | update (session) configuration file
   ansible.builtin.template:
